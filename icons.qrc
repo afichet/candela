@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/network-wired-solid.svg</file>
+        <file>icons/ban-solid.svg</file>
+        <file>icons/check-solid.svg</file>
+        <file>BridgeView.qml</file>
+        <file>PairBridge.qml</file>
+        <file>LightControl.qml</file>
+        <file>icons/arrow-left-solid.svg</file>
+        <file>icons/minus-solid.svg</file>
+        <file>icons/times-solid.svg</file>
+    </qresource>
+</RCC>

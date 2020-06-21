@@ -1,0 +1,10 @@
+{
+    "files": [
+        "main.py",
+        "main.qml",
+        "icons.qrc",
+        "bridge_model.py",
+        "app_config.py",
+        "light_model.py",
+        "bridge_access.py"]
+}
