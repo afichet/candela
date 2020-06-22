@@ -1,15 +1,18 @@
 language: python
 
-dist: xenial
-
-cache:
-  pip:true
-  directories:
-    - $HOME/.ccache
+addons:
+  apt:
+    packages:
+	  - python3
+	  - python3-pip
+	  - python3-setuptools
+	  - python3-wheel
+	dist: bionic
+	os: linux
 
 install:
-  - pip install phue
-  - pip install cx_Freeze
+  - pip3 install phue
+  - pip3 install cx_Freeze
 
 build:
   - cd src
