@@ -1,6 +1,9 @@
 # This Python file uses the following encoding: utf-8
 #from PySide2.QtCore import QAbstractItemModel, QModelIndex, QVariant
-from PySide2.QtCore import *
+from PySide2.QtCore import QAbstractListModel
+from PySide2.QtCore import QModelIndex
+from PySide2.QtCore import Qt
+
 from app_config import AppConfig
 
 

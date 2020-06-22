@@ -1,6 +1,4 @@
 # This Python file uses the following encoding: utf-8
-from PySide2 import QtWidgets
-
 import phue
 
 from PySide2.QtCore import QObject, Signal, Slot, Property
@@ -15,7 +13,7 @@ class BridgeAccess(QObject):
 
         try:
             self.bridge = phue.Bridge(self.ip_val, self.user_val)
-        except phue.PhueRegistrationException as e:
+        except phue.PhueRegistrationException:
             print("Error connecting to the bridge")
 
     def __init__(self, parent=None):
@@ -30,7 +28,7 @@ class BridgeAccess(QObject):
             self.bridge.connect()
             self.user = self.bridge.username
             self.connection_established.emit(self.user_val)
-        except phue.PhueRegistrationException as e:
+        except phue.PhueRegistrationException:
             print("Error connecting to the bridge")
 
     connection_established = Signal(str, name="connection_established")
@@ -50,7 +48,7 @@ class BridgeAccess(QObject):
 
     def _set_user(self, v):
         self.user_val = v
-        if not self.ip_val == None:
+        if self.ip_val is not None:
             print(self.ip_val, self.user_val)
             self.bridge = phue.Bridge(self.ip, self.user)
             self.bridge.connect()

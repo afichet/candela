@@ -7,13 +7,10 @@ from PySide2.QtCore import Slot
 from PySide2.QtCore import Signal
 from PySide2.QtCore import Property
 
-from bridge_access import BridgeAccess
-
 import phue
 
 
 # Colour utility functions
-
 
 def clamp(v, a=0, b=1):
     return min(max(v, a), b)
@@ -27,14 +24,18 @@ def xy_rgb(xy, brightness):
     X = x * d
     Z = (1 - x - y) * d
 
-    R =  3.24096994 * X - 1.53738318 * Y - 0.49861076 * Z
-    G = -0.96924364 * X + 1.8759675  * Y + 0.04155506 * Z
-    B =  0.05563008 * X - 0.20397696 * Y + 1.05697151 * Z
+    R = 3.24096994 * X - 1.53738318 * Y - 0.49861076 * Z
+    G = -0.96924364 * X + 1.8759675 * Y + 0.04155506 * Z
+    B = 0.05563008 * X - 0.20397696 * Y + 1.05697151 * Z
 
     c = [R, G, B]
 
     # sRGB gamma correction
-    c = [12.92 * v if v <= 0.0031308 else (1.055 * pow(v, 1./2.4) - 0.055) for v in c]
+    c = [
+        12.92 * v
+        if v <= 0.0031308
+        else (1.055 * pow(v, 1./2.4) - 0.055)
+        for v in c]
 
     return [int(255 * clamp(v)) for v in c]
 

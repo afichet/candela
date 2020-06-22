@@ -5,7 +5,8 @@ import requests
 import phue
 import os
 
-from PySide2.QtCore import QObject, Signal, Slot
+from PySide2.QtCore import QObject, Slot
+
 
 class AppConfig(QObject):
     config_file = os.path.join(os.path.dirname(__file__), 'config.json')
@@ -66,8 +67,10 @@ class AppConfig(QObject):
 
                     # Attempt to connect
                     try:
-                        bridge = phue.Bridge(known_bridge['ip'], known_bridge['user'])
-                    except phue.PhueRegistrationException as e:
+                        bridge = phue.Bridge(
+                            known_bridge['ip'],
+                            known_bridge['user'])
+                    except phue.PhueRegistrationException:
                         # Connection failed
                         known_bridge['accepted'] = False
                         continue
