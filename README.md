@@ -1,4 +1,6 @@
-![icon_low](https://user-images.githubusercontent.com/7930348/85316656-62586400-b4bd-11ea-9c4e-68e5f760587a.png) [![Build Status](https://travis-ci.com/afichet/candela.svg?branch=master)](https://travis-ci.com/afichet/candela)
+
+![256](https://user-images.githubusercontent.com/7930348/85344114-073f6500-b4ef-11ea-9287-ec757b42d9f1.png)
+[![Build Status](https://travis-ci.com/afichet/candela.svg?branch=master)](https://travis-ci.com/afichet/candela)
 
 # Candela
 
