@@ -15,11 +15,18 @@ import sys
 base = 'Win32GUI' if sys.platform=='win32' else None
 
 executables = [
-    Executable('main.py', base=base, targetName = 'Candela')
+    Executable(
+        'main.py',
+        base=base,
+        targetName='Candela',
+        icon='icons/icon.ico'
+        )
 ]
 
-setup(name='Candela',
-      version = '0.1',
-      description = 'Application to control Philips Hue lights',
-      options = dict(build_exe = buildOptions),
-      executables = executables)
+setup(
+    name='Candela',
+    version = '0.1',
+    description = 'Application to control Philips Hue lights',
+    options = dict(build_exe = buildOptions),
+    executables = executables
+    )

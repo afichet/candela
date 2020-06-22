@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>icons/network-wired-solid.svg</file>
-        <file>icons/network-wired-solid.png</file>
         <file>icons/ban-solid.svg</file>
         <file>icons/check-solid.svg</file>
         <file>icons/arrow-left-solid.svg</file>
