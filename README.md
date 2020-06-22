@@ -14,22 +14,26 @@ Application to control Philips Hue lights.
 This program uses phue and Qt (PySide2).
 
 ```
-pip install phue
-pip install PySide2
+pip3 install phue
+pip3 install fbs PySide2
+pip3 install requests
+pip3 install --upgrade PyInstaller==3.5
 ```
 
-Freeze step uses cx_Freeze.
+## Run
 
 ```
-pip install cx_Freeze
+fbs run
 ```
 
 ## Build
 
 ```
-cd src
-python setup.py build
+fbs freeze
+fbs installer
 ```
+
+Depending on your platform, an installer is created in `target` folder.
 
 # License
 
