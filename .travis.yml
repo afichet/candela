@@ -1,0 +1,16 @@
+language: python
+
+dist: xenial
+
+cache:
+	pip:true
+	directories:
+		- $HOME/.ccache
+
+install:
+	- pip install phue
+	- pip install cx_Freeze
+
+build:
+	- cd src
+	- python setup.py build
