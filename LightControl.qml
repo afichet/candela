@@ -51,9 +51,12 @@ Page {
         }
     }
 
+
+
     ListView {
         id: lightListView
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height
         topMargin: 20
         leftMargin: 48
         bottomMargin: 20
@@ -63,17 +66,23 @@ Page {
         delegate: RowLayout {
             width: lightListView.width - lightListView.leftMargin - lightListView.rightMargin
             spacing: 50
+
             Button {
                 id: button
-                onPressed: colorDialog.open()
+                onPressed: {
+                    colorDialog.currentColor = colour;
+                    colorDialog.open();
+                }
                 Layout.alignment: Qt.AlignLeft
                 background: Rectangle {
+                    id: buttonBackground
                     implicitHeight: 40
                     implicitWidth: 40
                     color: colour
                     border.color: "#222222"
                 }
             }
+
             Label {
                 id: label
                 text: name
@@ -98,16 +107,29 @@ Page {
 
             ColorDialog {
                 id: colorDialog
+                title: name + " " + qsTr("color")
                 onColorChanged: root.light.change_color(id, currentColor)
                 onAccepted: root.light.change_color(id, color)
                 Timer {
-                    interval: 200
-                    running: parent.visible
+                    interval: 300
+                    running: colorDialog.visible
                     repeat: true
-                    onTriggered: root.light.change_color(id, parent.currentColor);
+                    onTriggered:
+                        if (parent.currentColor != colour) {
+                            //buttonBackground.color = parent.currentColor;
+                            root.light.change_color(id, parent.currentColor);
+                        }
                 }
-
             }
+        }
+
+        // Update the light list every 1 second in case another app is
+        // interacting with those
+        Timer {
+            interval: 1000
+            running: true
+            repeat: true
+            onTriggered: light.update()
         }
     }
 }

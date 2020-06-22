@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>BridgeView.qml</file>
+        <file>LightControl.qml</file>
+        <file>PairBridge.qml</file>
+    </qresource>
+</RCC>

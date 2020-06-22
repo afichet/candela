@@ -1,13 +1,21 @@
 # This Python file uses the following encoding: utf-8
 
-from PySide2.QtCore import *
+from PySide2.QtCore import Qt
+from PySide2.QtCore import QAbstractListModel
+from PySide2.QtCore import QModelIndex
+from PySide2.QtCore import Slot
+from PySide2.QtCore import Signal
+from PySide2.QtCore import Property
+
 from bridge_access import BridgeAccess
 
 import phue
 
+
 # Colour utility functions
 
-def clamp(v, a = 0, b = 1):
+
+def clamp(v, a=0, b=1):
     return min(max(v, a), b)
 
 
@@ -52,11 +60,19 @@ def rgb_xy(r, g, b):
 
 
 class LightModel(QAbstractListModel):
+    n_lights = 0
+
     def __init__(self, parent=None):
         super(LightModel, self).__init__(parent)
         self.bridge_val = None
         self.user_val = None
         self.ip_val = None
+
+    @Slot()
+    def update(self):
+        self.dataChanged.emit(
+            self.createIndex(0, 0),
+            self.createIndex(self.n_lights, 1))
 
     def index(self, row, column, parent=QModelIndex):
         return self.createIndex(row, column, parent)
@@ -65,9 +81,12 @@ class LightModel(QAbstractListModel):
         return self.createIndex()
 
     def rowCount(self, parent=QModelIndex):
-        if self.bridge == None:
-            return 0
-        return len(self.bridge.lights)
+        if self.bridge is None:
+            self.n_lights = 0
+
+        self.n_lights = len(self.bridge.lights)
+
+        return self.n_lights
 
     def data(self, index, role):
         key = self.roleNames()[role]
@@ -84,7 +103,6 @@ class LightModel(QAbstractListModel):
             return "#{0:02x}{1:02x}{2:02x}".format(R, G, B)
         elif key == b'brightness':
             return light.brightness/255
-    #dataChanged = Signal(QModelIndex, QModelIndex)
 
     def roleNames(self):
         return {
@@ -95,7 +113,7 @@ class LightModel(QAbstractListModel):
             Qt.UserRole + 5: b'brightness'}
 
     def _connect(self):
-        if not self.ip_val == None and not self.user_val == None:
+        if self.ip_val is not None and self.user_val is not None:
             self.bridge = phue.Bridge(self.ip, self.user)
             self.bridge.connect()
 
@@ -138,12 +156,16 @@ class LightModel(QAbstractListModel):
         self.bridge.lights[id].xy = xy
         self.bridge.lights[id].brightness = Y
 
-        self.dataChanged.emit(self.createIndex(id, 0), self.createIndex(id+1, 1))
+#        self.dataChanged.emit(
+#            self.createIndex(id, 0),
+#            self.createIndex(id+1, 1))
 
     @Slot(int, float)
     def set_brightness(self, id, brightness):
         self.bridge.lights[id].brightness = int(brightness * 255)
-        self.dataChanged.emit(self.createIndex(id, 0), self.createIndex(id+1, 1))
+#        self.dataChanged.emit(
+#            self.createIndex(id, 0),
+#            self.createIndex(id+1, 1))
 
     ip = Property(str, _ip, _set_ip, notify=ip_changed)
     user = Property(str, _user, _set_user, notify=user_changed)
