@@ -1,8 +1,8 @@
 # This Python file uses the following encoding: utf-8
+
 import sys
 import os
 
-from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtQml import qmlRegisterType
 
@@ -12,10 +12,16 @@ from bridge_access import BridgeAccess
 from light_model import LightModel
 
 if __name__ == '__main__':
-    sys_argv = sys.argv
-    sys_argv += ['--style', 'material']
-
-    app = QGuiApplication(sys_argv)
+    using_fbs = True
+    if using_fbs:
+        from fbs_runtime.application_context.PySide2 import ApplicationContext
+        appctxt = ApplicationContext()
+        app = appctxt.app
+    else:
+        from PySide2.QtGui import QGuiApplication
+        sys_argv = sys.argv
+        sys_argv += ['--style', 'material']
+        app = QGuiApplication(sys_argv)
 
     qmlRegisterType(AppConfig, 'AppConfig', 1, 0, 'AppConfig')
     qmlRegisterType(BridgeModel, 'BridgeModel', 1, 0, 'BridgeModel')
@@ -35,8 +41,9 @@ if __name__ == '__main__':
     else:
         resource_dir = os.path.dirname(os.path.realpath(__file__))
         
-    engine.load(os.path.join(resource_dir, "main.qml"))
-    
+    #engine.load(os.path.join(resource_dir, "main.qml"))
+    view_main = appctxt.get_resource('main.qml')
+    engine.load(view_main)
     if not engine.rootObjects():
         sys.exit(-1)
     sys.exit(app.exec_())

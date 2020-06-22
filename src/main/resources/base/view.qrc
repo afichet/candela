@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>BridgeView.qml</file>
         <file>LightControl.qml</file>
-        <file>PairBridge.qml</file>
+        <file>PairBridge.qml</file>        
+	<file>main.qml</file>
     </qresource>
 </RCC>
