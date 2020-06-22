@@ -14,8 +14,9 @@ addons:
 
 install:
   - pip3 install phue
-  - pip3 install cx_Freeze
+  - pip3 install fbs PySide2
+  - pip3 install requests
+  - pip3 install --upgrade PyInstaller=3.5
 
 script:
-  - cd src
-  - python setup.py build
+  - fbs freeze
