@@ -28,8 +28,15 @@ if __name__ == '__main__':
     engine = QQmlApplicationEngine()
     engine.rootContext().setContextProperty("app_config", app_config)
     engine.rootContext().setContextProperty("bridge_model", bridges)
-    engine.load(os.path.join(os.path.dirname(__file__), "main.qml"))
 
+    resource_dir = ''
+    if getattr(sys, 'frozen', False):
+        resource_dir = os.path.dirname(sys.executable)
+    else:
+        resource_dir = os.path.dirname(os.path.realpath(__file__))
+        
+    engine.load(os.path.join(resource_dir, "main.qml"))
+    
     if not engine.rootObjects():
         sys.exit(-1)
     sys.exit(app.exec_())
