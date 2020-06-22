@@ -5,11 +5,15 @@ import requests
 import phue
 import os
 
-from PySide2.QtCore import QObject, Slot
+from PySide2.QtCore import QObject
+from PySide2.QtCore import Slot
+from PySide2.QtCore import QStandardPaths
 
 
 class AppConfig(QObject):
-    config_file = os.path.join(os.path.dirname(__file__), 'config.json')
+    config_file = os.path.join(
+        QStandardPaths.writableLocation(QStandardPaths.ConfigLocation),
+        'candela.json')
 
     paired_bridges = []
     reachable_bridges = []
@@ -17,7 +21,8 @@ class AppConfig(QObject):
 
     def __init__(self, parent=None):
         super(AppConfig, self).__init__(parent)
-
+        print()
+              
         if os.path.exists(self.config_file):
             with open(self.config_file, 'r') as cfg:
                 print("Configuration file found")
