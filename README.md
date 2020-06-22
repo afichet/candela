@@ -1,6 +1,6 @@
+![icon_low](https://user-images.githubusercontent.com/7930348/85316656-62586400-b4bd-11ea-9c4e-68e5f760587a.png) [![Build Status](https://travis-ci.com/afichet/candela.svg?branch=master)](https://travis-ci.com/afichet/candela)
+
 # Candela
-![icon](https://user-images.githubusercontent.com/7930348/85316451-13aaca00-b4bd-11ea-9bc2-cb822d9f4a31.png)
-[![Build Status](https://travis-ci.com/afichet/candela.svg?branch=master)](https://travis-ci.com/afichet/candela)
 
 Application to control Philips Hue lights.
 
