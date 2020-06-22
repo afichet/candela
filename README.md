@@ -1,7 +1,7 @@
 # Candela
+[![Build Status](https://travis-ci.com/afichet/candela.svg?branch=master)](https://travis-ci.com/afichet/candela)
 
 Application to control Philips Hue lights.
-
 
 ![home](https://user-images.githubusercontent.com/7930348/85293780-1fd35f00-b49e-11ea-8494-80fe63aacfde.png)
 
