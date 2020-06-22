@@ -14,6 +14,6 @@ install:
   - pip3 install phue
   - pip3 install cx_Freeze
 
-build:
+script:
   - cd src
   - python setup.py build
