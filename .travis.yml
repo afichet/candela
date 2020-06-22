@@ -3,12 +3,12 @@ language: python
 addons:
   apt:
     packages:
-	  - python3
-	  - python3-pip
-	  - python3-setuptools
-	  - python3-wheel
-	dist: bionic
-	os: linux
+      - python3
+      - python3-pip
+      - python3-setuptools
+      - python3-wheel
+    dist: bionic
+    os: linux
 
 install:
   - pip3 install phue
